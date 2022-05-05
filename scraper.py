@@ -4,7 +4,10 @@ import requests
 from bs4 import BeautifulSoup
 import json
 
-url = "https://www.ceneo.pl/91714422#4tab=reviews"
+
+produkt = input("enter number:")
+#wprowadzenie numeru produktu z linku na stronie ^
+url = "https://www.ceneo.pl/"+produkt+"#tab=reviews"
 
 all_opinions = []
 while(url):
@@ -53,6 +56,5 @@ while(url):
         url = "https://www.ceneo.pl" + page.select_one("a.pagination__next")["href"]
     except TypeError:
         url= None
-with open("opinions/91714422.json", "w", encoding="UTF-8") as jf:
+with open("opinions/"+produkt+".json", "w", encoding="UTF-8") as jf:
     json.dump(all_opinions, jf, indent= 4, ensure_ascii=False)
-
